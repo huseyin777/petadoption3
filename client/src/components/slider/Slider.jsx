@@ -5,6 +5,7 @@ function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
 
   const changeSlide = (direction) => {
+    10;
     if (direction === "left") {
       if (imageIndex === 0) {
         setImageIndex(images.length - 1);

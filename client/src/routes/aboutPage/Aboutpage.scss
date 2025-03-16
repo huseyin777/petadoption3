@@ -1,0 +1,70 @@
+@import "../../responsive.scss";
+
+.aboutPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  gap: 50px;
+
+  @include md {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .content {
+    flex: 1;
+    max-width: 600px;
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+
+      @include lg {
+        font-size: 36px;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 30px;
+
+      @include sm {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stat {
+        text-align: center;
+
+        h2 {
+          font-size: 32px;
+          color: #ff6b6b;
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+
+  .imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+
+    img {
+      width: 85%;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

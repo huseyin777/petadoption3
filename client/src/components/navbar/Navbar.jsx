@@ -18,22 +18,21 @@ function Navbar() {
     <nav>
       <div className="left">
         <a href="/" className="logo">
-          <img src="/logo.png" alt="" />
+          <img src="/logooo.png" alt="" />
           <span>Test</span>
         </a>
         <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
-        <a href="/">Agents</a>
+        <a href="/profile">Profile</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
       </div>
       <div className="right">
         {currentUser ? (
           <div className="user">
-            <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
-            <span>{currentUser.username}</span>
             <Link to="/profile" className="profile">
+              <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
+              <span>{currentUser.username}</span>
               {number > 0 && <div className="notification">{number}</div>}
-              <span>Profile</span>
             </Link>
           </div>
         ) : (
@@ -53,9 +52,10 @@ function Navbar() {
         </div>
         <div className={open ? "menu active" : "menu"}>
           <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
-          <a href="/">Agents</a>
+          <a href="/profile">Profile</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+
           <a href="/">Sign in</a>
           <a href="/">Sign up</a>
         </div>

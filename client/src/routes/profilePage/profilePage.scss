@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@use "../../responsive" as *;
 
 .profilePage {
   display: flex;
@@ -87,4 +87,17 @@
       height: 100%;
     }
   }
+}
+.deleteButton {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.deleteButton:hover {
+  background: #ff3333;
 }

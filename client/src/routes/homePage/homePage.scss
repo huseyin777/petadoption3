@@ -3,19 +3,17 @@
 .homePage {
   display: flex;
   height: 100%;
-  height: calc(100vh - 100px);
+
   .textContainer {
     flex: 3;
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    margin-left: 50px;
+
     .wrapper {
       padding-right: 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 35px;
+      gap: 20px;
+      height: 100%;
 
       @include lg {
         padding-right: 50px;
@@ -62,7 +60,8 @@
   }
 
   .imgContainer {
-    flex: 1;
+    flex: 1.5;
+    background-color: white;
     position: relative;
     display: flex;
     align-items: center;
@@ -72,7 +71,7 @@
     }
 
     img {
-      width: 115%;
+      width: 90%;
       position: absolute;
       right: 0;
 

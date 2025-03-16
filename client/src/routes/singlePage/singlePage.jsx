@@ -10,7 +10,6 @@ const SinglePostPage = () => {
   const data = useLoaderData();
   const navigate = useNavigate();
 
-  // API'den gelen verileri düzgün çek
   const post = data || {};
   const { postDetail, user } = post;
 
@@ -19,12 +18,11 @@ const SinglePostPage = () => {
   const [messageText, setMessageText] = useState("");
   const [showMessageModal, setShowMessageModal] = useState(false);
 
-  // WebSocket bağlantısı
   const socket = io("http://localhost:8800");
 
   useEffect(() => {
     return () => {
-      socket.disconnect(); // Sayfa değiştiğinde socket bağlantısını kapat
+      socket.disconnect();
     };
   }, []);
 
@@ -33,7 +31,10 @@ const SinglePostPage = () => {
       navigate("/login");
       return;
     }
-
+    if (currentUser.id === user?.id) {
+      alert("You cannot save your own post!");
+      return;
+    }
     setSaved((prev) => !prev);
     try {
       await apiRequest.post("/users/save", { postId: post.id });
@@ -61,17 +62,14 @@ const SinglePostPage = () => {
     }
 
     try {
-      // 1️⃣ Chat var mı kontrol et, yoksa yeni chat başlat
       const chatRes = await apiRequest.post("/chats", {
         receiverId: user.id,
       });
 
-      // 2️Mesajı kaydet
       const messageRes = await apiRequest.post(`/messages/${chatRes.data.id}`, {
         text: messageText,
       });
 
-      // 3️⃣ WebSocket ile mesajı alıcıya ilet
       socket.emit("sendMessage", {
         receiverId: user.id,
         data: {
@@ -98,16 +96,13 @@ const SinglePostPage = () => {
             &lt; Back
           </button>
 
-          {/* Kullanıcı bilgileri */}
           <div className="authorInfo">
             <img src={user?.avatar} alt="User avatar" className="avatar" />
             <span>{user?.username}</span>
           </div>
 
-          {/* Fotoğraf Galerisi */}
           {post.images?.length > 0 && <Slider images={post.images} />}
 
-          {/* Temel Bilgiler */}
           <div className="section">
             <h1>{post.title}</h1>
             <div className="infoGrid">
@@ -129,17 +124,14 @@ const SinglePostPage = () => {
             </div>
           </div>
 
-          {/* Butonlar */}
           <div className="buttons">
             <button onClick={() => setShowMessageModal(true)}>
-              <img src="/chat.png" alt="" />
               Send a Message
             </button>
             <button
               onClick={handleSave}
               style={{ backgroundColor: saved ? "#fece51" : "white" }}
             >
-              <img src="/save.png" alt="" />
               {saved ? "Place Saved" : "Save the Place"}
             </button>
           </div>

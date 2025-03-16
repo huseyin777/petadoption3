@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@use "../../responsive" as *;
 html,
 body {
   height: 100%;
@@ -31,10 +31,16 @@ body {
 .backButton {
   background: #f0f0f0;
   border: none;
-  padding: 10px 20px;
-  margin-bottom: 20px;
+  padding: 5px 10px; // Daha az iç boşluk
+  margin-bottom: 15px;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 14px; // Daha küçük font
+  width: fit-content; // İçeriğe göre genişliği ayarla
+  min-width: 70px; // Minimum genişlik sınırı
+  text-align: center;
+  display: inline-block; // İçeriğe göre genişliği ayarla
+
   &:hover {
     background: #e0e0e0;
   }
@@ -177,4 +183,45 @@ body {
 .modalButtons button {
   padding: 8px 16px;
   cursor: pointer;
+}
+
+.image {
+  flex: 10;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+
+  button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+  }
+
+  button:first-child {
+    background-color: #fece51;
+    color: white;
+
+    &:hover {
+      background-color: #e63946;
+    }
+  }
+
+  button:last-child {
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #fece51;
+
+    &:hover {
+      background-color: #fece51;
+      color: #333;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -11,7 +11,9 @@ function NewPostPage() {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
   const [healthStatus, setHealthStatus] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state to disable button
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const navigate = useNavigate();
 
   const handleHealthStatusChange = (status) => {
@@ -66,6 +68,22 @@ function NewPostPage() {
     }
   };
 
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLatitude(position.coords.latitude.toString());
+          setLongitude(position.coords.longitude.toString());
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   return (
     <div className="newPostPage">
       <div className="formContainer">
@@ -75,7 +93,7 @@ function NewPostPage() {
             {/* Basic Information */}
             <div className="item">
               <label htmlFor="title">Pet Name</label>
-              <input id="title" name="title" type="text" required />
+              <input id="title" name="title" type="text" />
             </div>
 
             <div className="item">
@@ -91,7 +109,7 @@ function NewPostPage() {
 
             <div className="item">
               <label htmlFor="breed">Breed</label>
-              <input id="breed" name="breed" type="text" required />
+              <input id="breed" name="breed" type="text" />
             </div>
 
             <div className="item">
@@ -109,22 +127,34 @@ function NewPostPage() {
             {/* Location Information */}
             <div className="item">
               <label htmlFor="address">Address</label>
-              <input id="address" name="address" type="text" required />
+              <input id="address" name="address" type="text" />
             </div>
 
             <div className="item">
               <label htmlFor="city">City</label>
-              <input id="city" name="city" type="text" required />
+              <input id="city" name="city" type="text" />
             </div>
 
             <div className="item">
               <label htmlFor="latitude">Latitude</label>
-              <input id="latitude" name="latitude" type="text" required />
+              <input
+                id="latitude"
+                name="latitude"
+                type="text"
+                value={latitude}
+                onChange={(e) => setLatitude(e.target.value)}
+              />
             </div>
 
             <div className="item">
               <label htmlFor="longitude">Longitude</label>
-              <input id="longitude" name="longitude" type="text" required />
+              <input
+                id="longitude"
+                name="longitude"
+                type="text"
+                value={longitude}
+                onChange={(e) => setLongitude(e.target.value)}
+              />
             </div>
 
             {/* Health Information */}
@@ -153,43 +183,30 @@ function NewPostPage() {
             </div>
 
             <div className="item">
-              <label htmlFor="behavior">Behavior</label>
-              <textarea id="behavior" name="behavior" required />
+              <label htmlFor="po">Behavior</label>
+              <textarea id="behavior" name="behavior" />
             </div>
 
             <div className="item">
               <label htmlFor="interaction">Interaction with Others</label>
-              <textarea id="interaction" name="interaction" required />
+              <textarea id="interaction" name="interaction" />
             </div>
 
             <div className="item">
               <label htmlFor="trainingStatus">Training Status</label>
-              <input
-                id="trainingStatus"
-                name="trainingStatus"
-                type="text"
-                required
-              />
+              <input id="trainingStatus" name="trainingStatus" type="text" />
             </div>
 
             <div className="item">
               <label htmlFor="careRequirements">Care Requirements</label>
-              <textarea
-                id="careRequirements"
-                name="careRequirements"
-                required
-              />
+              <textarea id="careRequirements" name="careRequirements" />
             </div>
 
             <div className="item">
               <label htmlFor="adoptionRequirements">
                 Adoption Requirements
               </label>
-              <textarea
-                id="adoptionRequirements"
-                name="adoptionRequirements"
-                required
-              />
+              <textarea id="adoptionRequirements" name="adoptionRequirements" />
             </div>
 
             <div className="item">

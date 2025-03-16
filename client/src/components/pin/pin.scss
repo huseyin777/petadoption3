@@ -15,26 +15,3 @@
     justify-content: space-between;
   }
 }
-.petImage {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.petLink {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-
-.petLink:hover {
-  color: #0073e6;
-}
-
-span,
-b {
-  display: block;
-  margin-top: 5px;
-}

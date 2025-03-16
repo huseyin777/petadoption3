@@ -2,7 +2,13 @@ import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profilePage.scss";
 import apiRequest from "../../lib/apiRequest";
-import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
+import {
+  Await,
+  Link,
+  useLoaderData,
+  useNavigate,
+  useRevalidator,
+} from "react-router-dom";
 import { Suspense, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,6 +18,7 @@ function ProfilePage() {
   const { updateUser, currentUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const revalidator = useRevalidator();
 
   const handleLogout = async () => {
     try {
@@ -20,6 +27,15 @@ function ProfilePage() {
       navigate("/");
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleDeletePost = async (postId) => {
+    try {
+      await apiRequest.delete(`/posts/${postId}`);
+      revalidator.revalidate(); // Refresh the data
+    } catch (err) {
+      console.error("Failed to delete post:", err);
     }
   };
   console.log(data.userPosts);
@@ -52,13 +68,17 @@ function ProfilePage() {
               <button>Create New Post</button>
             </Link>
           </div>
+
           <Suspense fallback={<p>Loading...</p>}>
             <Await
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
             >
               {(postResponse) => (
-                <List posts={postResponse.data.data.userPosts || []} />
+                <List
+                  posts={postResponse.data.data.userPosts || []}
+                  onDelete={handleDeletePost}
+                />
               )}
             </Await>
           </Suspense>
