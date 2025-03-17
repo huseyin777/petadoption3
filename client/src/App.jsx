@@ -13,7 +13,7 @@ import {
   profilePageLoader,
   singlePageLoader,
 } from "./lib/loaders.js";
-import About from "./routes/aboutPage/aboutPage.jsx";
+import About from "./routes/aboutPagee/aboutPage.jsx";
 import ContactPage from "./routes/contactPage/contactPage.jsx";
 
 function App() {
