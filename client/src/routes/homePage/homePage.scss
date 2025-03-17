@@ -6,14 +6,13 @@
 
   .textContainer {
     flex: 3;
-
+    height: calc(100% - 20px);
     .wrapper {
       padding-right: 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 50px;
-      height: 100%;
+      gap: 20px;
 
       @include lg {
         padding-right: 50px;
@@ -61,7 +60,7 @@
 
   .imgContainer {
     flex: 1;
-    background-color: #fcf5f3;
+    background-color: white;
     position: relative;
     display: flex;
     align-items: center;
@@ -71,7 +70,7 @@
     }
 
     img {
-      width: 115%;
+      width: 100%;
       position: absolute;
       right: 0;
 
