@@ -18,7 +18,7 @@ const SinglePostPage = () => {
   const [messageText, setMessageText] = useState("");
   const [showMessageModal, setShowMessageModal] = useState(false);
 
-  const socket = io("http://localhost:8800");
+  const socket = io("https://petadoption3.onrender.com");
 
   useEffect(() => {
     return () => {
