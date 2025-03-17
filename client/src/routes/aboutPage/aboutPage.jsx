@@ -1,4 +1,4 @@
-import "./aboutPage.scss";
+import "./aboutpage.scss";
 
 function AboutPage() {
   return (
